@@ -1,59 +1,361 @@
-# Agrega el archivo al staging
-git add index.html
-
-# Haz el primer commit
-git commit -m "Añadir mapa de valor SentiChile+"
-
-# Conecta con GitHub (usa la URL que copiaste)
-git remote add origin https://github.com/tu-usuario/sentichile-mapa-valor.git
-
-# Cambia el nombre de la rama a main (si es necesario)
-git branch -M main
-
-# Sube los archivos
-git push -u origin main
-```
-
-### Paso 7: Activar GitHub Pages
-- Sigue los mismos pasos de la Opción 1, Paso 3
-
----
-
-## Opción 3: Usando GitHub Desktop (más visual)
-
-### Paso 1: Instalar GitHub Desktop
-- Descarga desde [desktop.github.com](https://desktop.github.com/)
-- Instala e inicia sesión con tu cuenta de GitHub
-
-### Paso 2: Crear repositorio
-1. En GitHub Desktop, haz clic en **"File"** → **"New repository"**
-2. Nombre: `sentichile-mapa-valor`
-3. Local path: Elige dónde guardarlo
-4. Marca **"Initialize this repository with a README"**
-5. Haz clic en **"Create repository"**
-
-### Paso 3: Agregar el archivo HTML
-1. Haz clic en **"Show in Explorer"** (Windows) o **"Show in Finder"** (Mac)
-2. Crea un archivo llamado `index.html`
-3. Copia y pega el código del artefacto
-4. Guarda el archivo
-
-### Paso 4: Publicar
-1. Vuelve a GitHub Desktop
-2. Verás los cambios en la izquierda
-3. Escribe un mensaje de commit: "Añadir mapa de valor"
-4. Haz clic en **"Commit to main"**
-5. Haz clic en **"Publish repository"**
-6. Marca **"Public"** o **"Private"**
-7. Haz clic en **"Publish repository"**
-
-### Paso 5: Activar GitHub Pages
-- Ve a GitHub.com y sigue los pasos de la Opción 1, Paso 3
-
----
-
-## Estructura final del proyecto
-```
-sentichile-mapa-valor/
-├── index.html          (tu archivo del mapa de valor)
-└── README.md          (opcional, descripción del proyecto)
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Valor - SentiChile+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .canvas-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .section {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 30px;
+            border: 3px solid #667eea;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .subsection {
+            margin-bottom: 25px;
+        }
+        
+        .subsection-title {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .icon {
+            font-size: 1.5em;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .pain li {
+            border-left-color: #e74c3c;
+            background: #fff5f5;
+        }
+        
+        .gain li {
+            border-left-color: #27ae60;
+            background: #f0fff4;
+        }
+        
+        .pain-reliever li {
+            border-left-color: #3498db;
+            background: #f0f9ff;
+        }
+        
+        .gain-creator li {
+            border-left-color: #f39c12;
+            background: #fffbf0;
+        }
+        
+        .fit-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .fit-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .fit-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .fit-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .fit-item p {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .value-equation {
+            background: #fff9e6;
+            border: 3px solid #f39c12;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .value-equation h3 {
+            color: #f39c12;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .equation {
+            font-size: 1.1em;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .equation-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .detail-item strong {
+            color: #f39c12;
+        }
+        
+        .result {
+            text-align: center;
+            font-size: 1.3em;
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0fff4;
+            border-radius: 8px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 CANVAS DE PROPUESTA DE VALOR</h1>
+        <p class="subtitle">SentiChile+ | Value Proposition Canvas</p>
+        
+        <div class="canvas-container">
+            <!-- PERFIL DEL CLIENTE -->
+            <div class="section">
+                <div class="section-title">👥 PERFIL DEL CLIENTE</div>
+                
+                <div class="subsection">
+                    <div class="subsection-title"><span class="icon">📋</span> Trabajos del Cliente</div>
+                    <ul>
+                        <li><strong>Funcionales:</strong> Monitorear marca online, responder quejas, prevenir crisis, mejorar productos basado en feedback</li>
+                        <li><strong>Sociales:</strong> Ser percibido como profesional, mantener reputación local</li>
+                        <li><strong>Emocionales:</strong> Sentir control, reducir ansiedad, dormir tranquilo</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection pain">
+                    <div class="subsection-title"><span class="icon">😰</span> Frustraciones (Pains)</div>
+                    <ul>
+                        <li>Herramientas muy caras ($200k-$700k CLP/mes)</li>
+                        <li>Interfaces complejas, curva aprendizaje alta</li>
+                        <li>No entienden español chileno</li>
+                        <li>Detección tardía crisis (41.3h promedio)</li>
+                        <li>Requiere mucho tiempo manual (5-8h/semana)</li>
+                        <li>Muchas alertas falsas (ruido)</li>
+                        <li>No cubren fuentes locales (Reclamos.cl)</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection gain">
+                    <div class="subsection-title"><span class="icon">😊</span> Alegrías (Gains)</div>
+                    <ul>
+                        <li>Detección instantánea (<5 min)</li>
+                        <li>Herramienta que entiende contexto chileno</li>
+                        <li>Insights accionables sin ser experto</li>
+                        <li>Prevenir pérdidas económicas (15-40%)</li>
+                        <li>Paz mental (no ansiedad constante)</li>
+                        <li>Competir con empresas grandes</li>
+                        <li>Identificar embajadores de marca</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- MAPA DE VALOR -->
+            <div class="section">
+                <div class="section-title">💎 MAPA DE VALOR</div>
+                
+                <div class="subsection">
+                    <div class="subsection-title"><span class="icon">🛠️</span> Productos & Servicios</div>
+                    <ul>
+                        <li><strong>ChileBERT:</strong> Modelo NLP especializado español chileno</li>
+                        <li><strong>Dashboard:</strong> Interactivo tiempo real</li>
+                        <li><strong>Alertas:</strong> Automáticas multi-canal</li>
+                        <li><strong>API:</strong> Acceso programático</li>
+                        <li><strong>Soporte:</strong> WhatsApp <2h</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection pain-reliever">
+                    <div class="subsection-title"><span class="icon">💊</span> Aliviadores de Frustraciones</div>
+                    <ul>
+                        <li>✓ Pricing: $19,990/mes (8.8x más barato)</li>
+                        <li>✓ Onboarding: 10 min, sin curva aprendizaje</li>
+                        <li>✓ ChileBERT: 80% accuracy, entiende modismos</li>
+                        <li>✓ Detección: <5 min, alertas 24/7</li>
+                        <li>✓ Automatización: 0 horas manual</li>
+                        <li>✓ Filtros: Solo alertas criticidad >70</li>
+                        <li>✓ Cobertura: Reclamos.cl incluido</li>
+                    </ul>
+                </div>
+                
+                <div class="subsection gain-creator">
+                    <div class="subsection-title"><span class="icon">⭐</span> Creadores de Alegrías</div>
+                    <ul>
+                        <li>★ Reducción 99% tiempo (41.3h → 5min)</li>
+                        <li>★ Precisión +18.5pp vs. competencia</li>
+                        <li>★ Ahorro analista ($400k-$800k/mes)</li>
+                        <li>★ Prevención pérdidas $1.5M-$4M CLP</li>
+                        <li>★ Democratización tech corporativa</li>
+                        <li>★ NPS +15-25 puntos</li>
+                        <li>★ Validación identidad local</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FIT VALIDADO -->
+        <div class="fit-section">
+            <h2>✅ FIT VALIDADO</h2>
+            <div class="fit-grid">
+                <div class="fit-item">
+                    <h3>Pain-Solution Fit</h3>
+                    <p><strong>87.5%</strong> PyMEs tuvieron crisis → SentiChile+ resuelve detección temprana</p>
+                </div>
+                <div class="fit-item">
+                    <h3>Gain-Feature Fit</h3>
+                    <p><strong>ChileBERT</strong> entrega precisión diferenciada (80% vs 61.5% baseline)</p>
+                </div>
+                <div class="fit-item">
+                    <h3>Price-Value Fit</h3>
+                    <p><strong>63%</strong> dispuesto pagar hasta $30k CLP/mes</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ECUACIÓN DE VALOR -->
+        <div class="value-equation">
+            <h3>📊 ECUACIÓN DE VALOR</h3>
+            <div class="equation">
+                Valor Percibido = (Beneficios Funcionales + Beneficios Emocionales) - (Precio + Esfuerzo)
+            </div>
+            <div class="equation-details">
+                <div class="detail-item">
+                    <strong>Beneficios Funcionales:</strong><br>
+                    Ahorro tiempo (5-8h/semana) + Prevención pérdidas ($1.5M-$4M) + Ahorro analista ($400k-$800k/mes)
+                </div>
+                <div class="detail-item">
+                    <strong>Beneficios Emocionales:</strong><br>
+                    Paz mental + Control + Validación identidad local
+                </div>
+                <div class="detail-item">
+                    <strong>Precio:</strong><br>
+                    $19,990-$39,990 CLP/mes (vs. $224k-$720k competencia)
+                </div>
+                <div class="detail-item">
+                    <strong>Esfuerzo:</strong><br>
+                    10 min onboarding + 10 min/día uso (vs. 5-8h/semana manual)
+                </div>
+            </div>
+            <div class="result">
+                Valor Neto = ALTAMENTE POSITIVO (ROI >500% conservador)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
