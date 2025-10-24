@@ -1,0 +1,1 @@
+# Sentichile-mapa-valor
